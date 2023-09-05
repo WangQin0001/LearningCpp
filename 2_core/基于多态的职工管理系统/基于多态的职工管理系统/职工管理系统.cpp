@@ -48,12 +48,16 @@ int main() {
 			wm.addWorker();
 			break;
 		case 2://显示职工
+			wm.show_Worker();
 			break;
 		case 3://删除职工
+			wm.delet_Worker();
 			break;
 		case 4://修改职工
+			wm.mod_Worker();
 			break;
 		case 5://查找职工
+			wm.find_Worker();
 			break;
 		case 6://按编号排序
 			break;

@@ -24,14 +24,37 @@ public:
 	//展示菜单
 	void showMenu();
 
-	//0.推出系统
+	//0.退出系统
 	void exitSystem();
 
 	//1、添加员工
 	void addWorker();
+	// 1.1、保存员工
 	void saveWorker();
+	// 1.2、获取员工数量
 	int get_WorkerNum();
+	// 1.3、初始化员工
 	void init_Worker();
+	// 1.4、判断员工id是否重复
+	bool idNotExist(int id);
+
+	//2、展示员工
+	void show_Worker();
+
+	//3、删除员工
+	void delet_Worker();
+	// 3.1、判断是否存在某员工
+	int isExist(int id);
+
+	//4、修改员工
+	void mod_Worker();
+
+	//5、查找员工
+	void find_Worker();
+	// 5.1、按编号查找
+	void find_WorkerById(int id);
+	// 5.2、按姓名查找
+	void find_WorkerByName(string name);
 
 	//析构函数
 	~WorkerManager();
