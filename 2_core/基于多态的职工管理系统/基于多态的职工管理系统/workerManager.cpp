@@ -353,15 +353,106 @@ void WorkerManager::find_WorkerByName(string name) {
 	}
 }
 
+//6、排序
+void WorkerManager::sort_Worker() {
+	if (this->m_fileIsEmpty) {
+		cout << "文件为空或不存在" << endl;
+		system("pause");
+		system("cls");
+	}
+	else {
+		cout << "请选择排序方式" << endl;
+		cout << "1、升序排" << endl;
+		cout << "2、降序排" << endl;
+		int select;
+		cin >> select;
+
+		for (int i = 0; i < this->m_workerNum; i++) {
+			int minOrMax = i;
+			for (int j = i; j < this->m_workerNum; j++) {
+
+				if (select == 1) {//升序
+					if (this->m_workerArry[minOrMax]->m_id > this->m_workerArry[j]->m_id) {
+						minOrMax = j;
+					}
+				}
+				else if (select == 2) {//降序
+					if (this->m_workerArry[minOrMax]->m_id < this->m_workerArry[j]->m_id)
+						minOrMax = j;
+				}
+				else {
+					cout << "输入有误！" << endl;
+					break;
+				}
+			}
+			if (minOrMax != i) {//若满足排序要求，则交换数据
+				Worker* temp = this->m_workerArry[i];
+				this->m_workerArry[i] = this->m_workerArry[minOrMax];
+				this->m_workerArry[minOrMax] = temp;
+			}
+		}
+		cout << "排序成功，排序后结果为：" << endl;
+		this->saveWorker();
+		this->show_Worker();
+	}
+}
 //析构函数
 WorkerManager::~WorkerManager() {
 	//手动释放堆区开辟的空间
 	if (this->m_workerArry != NULL) {
-		delete[]this->m_workerArry;
-		this->m_workerArry = NULL;
+		for (int i = 0; i < this->m_workerNum; i++) {//1.先判断数组中每一个元素是否为空，若不为空，先将其置为空
+			if (this->m_workerArry[i] != NULL) {
+				delete this->m_workerArry[i];
+				this->m_workerArry[i] = NULL;
+			}
+		}
+		delete[]this->m_workerArry;//2.再删除整个数组
+		this->m_workerArry = NULL;//3.再将指向数组的指针置为空
 	}
 }
 
+//7、清空文件
+void WorkerManager::clean_File() {
+	if (this->m_fileIsEmpty) {
+		cout << "文件已经为空，不用再清空了" << endl;
+		system("pause");
+		system("cls");
+	}
+	else {
+		cout << "确定清空文件吗？" << endl;
+		cout << "1、确定" << endl;
+		cout << "2、返回" << endl;
+		int select;
+		cin >> select;
+		if (select == 1) {
+			ofstream ofs;
+			ofs.open(FILENAME, ios::trunc);//打开模式 ios::trunc,如果文件存在先删除，再重新创建，变相清空文件
+			ofs.close();
+
+			for (int i = 0; i < this->m_workerNum; i++) {
+				delete this->m_workerArry[i];
+				this->m_workerArry[i] = NULL;
+			}
+			delete[] this->m_workerArry;
+			this->m_workerArry = NULL;
+
+			this->m_workerNum = 0;
+			this->m_fileIsEmpty = true;
+
+		}
+		else if (select == 2) {
+			return;
+		}
+		else {
+			cout << "输入有误！" << endl;
+			return;
+		}
+		cout << "文件清空成功！" << endl;
+		system("pause");
+		system("cls");
+	}
+
+}
 //展示菜单
 void WorkerManager::showMenu() {
 	cout << "********************************************" << endl;

@@ -56,6 +56,11 @@ public:
 	// 5.2、按姓名查找
 	void find_WorkerByName(string name);
 
+	//6、排序
+	void sort_Worker();
+
+	//7、清空文件
+	void clean_File();
 	//析构函数
 	~WorkerManager();
 

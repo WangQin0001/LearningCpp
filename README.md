@@ -29,3 +29,22 @@
    ​			cout << "sex: " << (ads.personArray[i].sex==1?"male":"female") << "\t";
    
 5. 值传递的本质是拷贝一个临时的副本出来，所以尽量用地址传递别用值传递
+
+
+
+6. case后面一定要加空格！！！注意编辑器的颜色提醒。
+
+   switch (newDIdSelect)
+   			{
+   			case 1://case后面一定要加空格！！！！！
+   				worker = new Employee(newId, newName, newDIdSelect);
+   				break;
+   			case 2:
+   				worker = new Manager(newId, newName, newDIdSelect);
+   				break;
+   			case 3:
+   				worker = new Boss(newId, newName, newDIdSelect);
+   				break;
+   			default:
+   				break;
+   			}

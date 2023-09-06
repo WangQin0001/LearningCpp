@@ -60,8 +60,10 @@ int main() {
 			wm.find_Worker();
 			break;
 		case 6://∞¥±‡∫≈≈≈–Ú
+			wm.sort_Worker();
 			break;
 		case 7://«Âø’
+			wm.clean_File();
 			break;
 		default:
 			system("cls");
